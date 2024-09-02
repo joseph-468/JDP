@@ -8,8 +8,8 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 file (GLOB_RECURSE SOURCES "src/*.cpp")
 
 if (WIN32)
-    include_directories(${CMAKE_SOURCE_DIR}/vendor/raylib-5.0_win64_mingw-w64/include)
-    link_directories(${CMAKE_SOURCE_DIR}/vendor/raylib-5.0_win64_mingw-w64/lib)
+    include_directories(${CMAKE_SOURCE_DIR}/vendor/raylib-5.0_win64_msvc16/include)
+    link_directories(${CMAKE_SOURCE_DIR}/vendor/raylib-5.0_win64_msvc16/lib)
 
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         add_executable(JDP ${SOURCES})
