@@ -18,6 +18,13 @@ if (WIN32)
     endif()
 
     target_link_libraries(JDP raylib winmm)
+elseif (LINUX)
+    include_directories(${CMAKE_SOURCE_DIR}/vendor/raylib-5.0_linux_amd64/include)
+    link_directories(${CMAKE_SOURCE_DIR}/vendor/raylib-5.0_linux_amd64/lib)
+
+    add_executable(JDP ${SOURCES})
+
+    target_link_libraries(JDP raylib)
 else()
     message(FATAL_ERROR "Operating System Unsupported")
 endif()
