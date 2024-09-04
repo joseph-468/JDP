@@ -2,10 +2,13 @@
 #include <iostream>
 
 #include "app.h"
+#include "widgets.h"
 
 constexpr double WINDOW_SIZE_PERCENTAGE = 2.0 / 3.0; // Percentage of the monitor that the window will take up by default.
 
-App::App() {
+App::App() : running(false), windowWidth(0), windowHeight(0) {}
+
+void App::run() {
     InitWindow(1, 1, "JDP");
     const int currentMonitor = GetCurrentMonitor();
     const int monitorWidth = GetMonitorWidth(currentMonitor);
@@ -14,26 +17,23 @@ App::App() {
     windowHeight = static_cast<int>(monitorHeight * WINDOW_SIZE_PERCENTAGE);
     SetWindowSize(windowWidth, windowHeight);
     SetWindowPosition(monitorWidth / 2 - windowWidth / 2, monitorHeight / 2 - windowHeight / 2);
-}
+    running = true;
 
-App::~App() {
+    while (!WindowShouldClose()) {
+        update();
+        render();
+    }
+
     CloseWindow();
+    running = false;
 }
 
 void App::update() {
-    Vector2 const mousePos = GetMousePosition();
-    std::cout << "Mouse X: " << mousePos.x << " Mouse Y: " << mousePos.y << std::endl;
 }
 
 void App::render() {
     BeginDrawing();
     ClearBackground(WHITE);
+    testWidget.display();
     EndDrawing();
-}
-
-void App::run() {
-    while (!WindowShouldClose()) {
-        update();
-        render();
-    }
 }
